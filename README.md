@@ -7,3 +7,5 @@ Get Docker Desktop
 docker image build -t python:0.0.1 <repo_path>
 
 docker run python:0.0.1
+
+terraform init -backend=false
