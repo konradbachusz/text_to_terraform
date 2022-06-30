@@ -5,9 +5,7 @@ from python_terraform import *
 import os.path
 import re
 
-
-
-
+#Get API key from environment variable
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def get_terraform(prompt):
@@ -16,7 +14,7 @@ def get_terraform(prompt):
     model="text-davinci-002",
     prompt=("Terraform code to create,"+str(prompt)),
     temperature=0.7,
-    max_tokens=256,
+    max_tokens=1000,
     top_p=1,
     frequency_penalty=0,
     presence_penalty=0
@@ -34,7 +32,7 @@ def clean_error_message(string):
     pattern="(\[31m╷\[0m\[0m)*(\[31m│\[0m \[0m\[1m\[31m)*(\[31m│\[0m \[0m)*(\[31m╵\[0m\[0m)*(\[)*(\[0m)*(0m)*(\[1m)*(1m)*"
     clean_string = re.sub(pattern, '', string )
     return clean_string
-    
+
 
 def validate_terraform():
     """This function performs basic validation of terraform code"""
@@ -51,7 +49,6 @@ def validate_terraform():
             result=clean_error_message(result.stderr.decode())
             output_correct=result
 
-    
     else:
         output_correct=False
     

@@ -12,36 +12,31 @@ prompt=st.text_input("Return Terraform code to create...", value="", max_chars=N
  placeholder=None, disabled=False)
 
 
-button1 = st.button('Terraform it!')
+#Button to get the prompt from Codex API
+if st.button('Terraform it!'):
 
-if st.session_state.get('button') != True:
-
-     st.session_state['button'] = button1
-
-if st.session_state['button'] == True:
-
-     #response=utils.get_terraform(prompt)
-     response="Terraform code"
+     response=utils.get_terraform(prompt)
      st.success(response)
 
-     edited_response=st.text_area('Code to test')
+#Text field to paste the code that needs validation
+edited_response=st.text_area('Enter the code to test')
 
-     if st.button('Validate the above code'):
-          utils.string_to_tf_file(edited_response)
-          utils.terraform_fmt()
+#Button to check if generated code is valid
+if st.button('Validate terraform code'):
+     utils.string_to_tf_file(edited_response)
+     utils.terraform_fmt()
 
-          validation_result=utils.validate_terraform()
-          if  validation_result is True:
+     validation_result=utils.validate_terraform()
+     if  validation_result is True:
 
-               st.success("Code valid")
-          else:
-               st.error("Code invalid")
-               #Return error message
-               st.header("Error Explanation")
-               st.text(validation_result)
-   
+          st.success("Code valid")
+     else:
+          st.error("Code invalid")
+          #Return error message
+          st.header("Error Explanation")
+          st.text(validation_result)
 
-          utils.remove_tf_file()
-          st.session_state['button'] = False
+     #Remove temporart terraform file
+     utils.remove_tf_file()
 
 
