@@ -2,6 +2,7 @@ import streamlit as st
 import utils
 from PIL import Image
 
+
 #App image
 image = Image.open('static\graphic.png')
 st.image(image)
@@ -35,8 +36,10 @@ if st.session_state['button'] == True:
                st.success("Code valid")
           else:
                st.error("Code invalid")
-               #Return error
+               #Return error message
+               st.header("Error Explanation")
                st.text(validation_result)
+   
 
           utils.remove_tf_file()
           st.session_state['button'] = False

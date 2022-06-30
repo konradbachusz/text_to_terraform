@@ -3,6 +3,7 @@ import openai
 import subprocess
 from python_terraform import *
 import os.path
+import re
 
 
 
@@ -28,24 +29,34 @@ def terraform_fmt():
     Terraform(working_dir='.').fmt()
     return None
 
-
+def clean_error_message(string):
+    """This function cleans the Terraform error message for display"""
+    pattern="(\[31m╷\[0m\[0m)*(\[31m│\[0m \[0m\[1m\[31m)*(\[31m│\[0m \[0m)*(\[31m╵\[0m\[0m)*(\[)*(\[0m)*(0m)*(\[1m)*(1m)*"
+    clean_string = re.sub(pattern, '', string )
+    return clean_string
+    
 
 def validate_terraform():
     """This function performs basic validation of terraform code"""
 
     if os.path.isfile("main.tf"):
-        result = subprocess.run(["terraform", "validate"], stdout=subprocess.PIPE)
-        print(result.stdout)
+        result=subprocess.run(["terraform", "validate"], capture_output=True)
         if "The configuration is valid" in str(result.stdout):
             output_correct=True
         else:
             #Return error message
-            output_correct=str(result.stdout)
+            result=subprocess.run(["terraform", "validate"], capture_output=True)
+
+            #Clean error message
+            result=clean_error_message(result.stderr.decode())
+            output_correct=result
+
     
     else:
         output_correct=False
     
     return output_correct
+    
 
 
 def string_to_tf_file(response):
@@ -64,4 +75,3 @@ def remove_tf_file():
     return None
 
 
-validate_terraform()
