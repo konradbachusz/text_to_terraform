@@ -35,10 +35,12 @@ def validate_terraform():
 
     if os.path.isfile("main.tf"):
         result = subprocess.run(["terraform", "validate"], stdout=subprocess.PIPE)
+        print(result.stdout)
         if "The configuration is valid" in str(result.stdout):
             output_correct=True
         else:
-            output_correct=False
+            #Return error message
+            output_correct=str(result.stdout)
     
     else:
         output_correct=False
@@ -60,3 +62,6 @@ def remove_tf_file():
     else:
         print("The file does not exist")
     return None
+
+
+validate_terraform()

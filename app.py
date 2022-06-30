@@ -28,12 +28,15 @@ if st.session_state['button'] == True:
      if st.button('Validate the above code'):
           utils.string_to_tf_file(edited_response)
           utils.terraform_fmt()
-        
-          if utils.validate_terraform() is True:
+
+          validation_result=utils.validate_terraform()
+          if  validation_result is True:
 
                st.success("Code valid")
           else:
                st.error("Code invalid")
+               #Return error
+               st.text(validation_result)
 
           utils.remove_tf_file()
           st.session_state['button'] = False
