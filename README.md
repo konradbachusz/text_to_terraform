@@ -15,9 +15,9 @@ Tool that converts natural language to Terraform code
 5. Run **$env:OPENAI_API_KEY="<YOUR_OPENAI_API_KEY>"** (this command may vary depending on the operating system)
 6. Run **streamlit run .\app.py** to open the web app locally
 7. Enter the description of desired resources into the textbox under "Return Terraform code to create..."
-   ![](static\prompt_screenshot.PNG)
+   ![](https://github.com/konradbachusz/text_to_terraform/blob/main/static/prompt_screenshot.PNG)
 8. Click on "Terraform it!" button
 9.  The AI generated code will be shown below.
 10. To validate the generated code, enter the code snippet into the text box below and click on "Validate terraform code"
     
-   ![](static\testing_screenshot.PNG)
+   ![](static\testing_screenshot.PNG](https://github.com/konradbachusz/text_to_terraform/blob/main/static/testing_screenshot.PNG)
