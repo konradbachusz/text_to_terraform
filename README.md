@@ -1,5 +1,5 @@
 # text_to_terraform
-![](static\graphic.PNG)
+![](https://github.com/konradbachusz/text_to_terraform/blob/main/static/graphic.PNG)
 Tool that converts natural language to Terraform code
 
 # Prerequisites
