@@ -20,4 +20,4 @@ Tool that converts natural language to Terraform code
 9.  The AI generated code will be shown below.
 10. To validate the generated code, enter the code snippet into the text box below and click on "Validate terraform code"
     
-   ![](static\testing_screenshot.PNG](https://github.com/konradbachusz/text_to_terraform/blob/main/static/testing_screenshot.PNG)
+   ![](https://github.com/konradbachusz/text_to_terraform/blob/main/static/testing_screenshot.PNG)
